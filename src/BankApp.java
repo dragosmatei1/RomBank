@@ -3,12 +3,17 @@ import java.util.Scanner;
 public class BankApp {
     BankService bankService = new BankService();
     Scanner scanner = new Scanner(System.in);
+    private BankAccount currentAccount = null;
 
     public void start(){
-        setupInitialData();
-
         boolean isRunning = true;
         System.out.println("Welcome to RomBank App!");
+        bankService.loadAccounts();
+
+        while(currentAccount == null){
+            login();
+        }
+
         while(isRunning){
             printMenu();
             int choice = scanner.nextInt();
@@ -18,16 +23,33 @@ public class BankApp {
                 case 1 -> showBalance();
                 case 2 -> depositMoney();
                 case 3 -> withdrawMoney();
-                case 4 -> isRunning = false;
+                case 4 -> {
+                    bankService.saveAccounts();
+                    isRunning = false;
+                }
                 default -> System.out.println("Invalid choice!");
             }
         }
         System.out.println("Thank you for using our app!");
     }
 
-    private void setupInitialData(){
-        bankService.addAccount(new SavingsAccount("SV001", "Andrei", 1000.0, 3.5));
-        bankService.addAccount(new CheckingAccount("CH001", "Maria", 500.0, 200.0));
+    private void login() {
+        System.out.println("Please enter your account number: ");
+        String accountNumber = scanner.nextLine();
+        BankAccount currentAcc = bankService.getAccount(accountNumber);
+
+        if (currentAcc != null) {
+            System.out.print("Introduce your PIN: ");
+            String pin = scanner.nextLine();
+            if (currentAcc.validatePin(pin)) {
+                currentAccount = currentAcc;
+                System.out.println("You have successfully logged in!");
+            } else {
+                System.out.println("Incorrect PIN!");
+            }
+        } else {
+            System.out.println("Account number not found!");
+        }
     }
 
     private void printMenu() {
@@ -36,46 +58,46 @@ public class BankApp {
     }
 
     private void showBalance(){
-        System.out.println("Type your account number: ");
-        String accountNumber = scanner.nextLine();
-        BankAccount bankAccount = bankService.getAccount(accountNumber);
-
-        if (bankAccount != null){
-            System.out.println("Account owner: " + bankAccount.getAccountNumber());
-            System.out.println("Balance: " + bankAccount.getBalance());
+        if (currentAccount != null){
+            System.out.println("Account owner: " + currentAccount.getAccountNumber());
+            System.out.println("Balance: $" + currentAccount.getBalance());
         }
         else{
-            System.out.println("Account does not exist!");
+            System.out.println("Unknown error!");
         }
     }
 
     private void depositMoney(){
-        System.out.println("Type your account number: ");
-        String accountNumber = scanner.nextLine();
         System.out.println("Amount to be deposited: ");
         double amount = scanner.nextDouble();
 
-        BankAccount bankAccount = bankService.getAccount(accountNumber);
-        if(bankAccount != null){
-            bankAccount.deposit(amount);
+        if(amount <= 0){
+            System.out.println("Amount must be greater than 0.");
+            return;
+        }
+
+        if(currentAccount != null){
+            currentAccount.deposit(amount);
         }
         else{
-            System.out.println("Account does not exist!");
+            System.out.println("Unknown error!");
         }
     }
 
     private void withdrawMoney(){
-        System.out.println("Type your account number: ");
-        String accountNumber = scanner.nextLine();
         System.out.println("Amount to be withdrawn: ");
         double amount = scanner.nextDouble();
 
-        BankAccount bankAccount = bankService.getAccount(accountNumber);
-        if(bankAccount != null){
-            bankAccount.withdraw(amount);
+        if(amount <= 0){
+            System.out.println("Amount must be greater than 0.");
+            return;
+        }
+
+        if(currentAccount != null){
+            currentAccount.withdraw(amount);
         }
         else{
-            System.out.println("Account does not exist!");
+            System.out.println("Unkown error!");
         }
     }
 }

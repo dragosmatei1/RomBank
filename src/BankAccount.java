@@ -4,9 +4,14 @@ import lombok.*;
 public abstract class BankAccount {
     private String user;
     private String accountNumber;
+    private String pin;
 
     @Setter(AccessLevel.PROTECTED)
     private double balance;
+
+    public boolean validatePin(String inputPin) {
+        return this.pin.equals(inputPin);
+    }
 
     public void deposit(double amount){
         if (amount > 0){

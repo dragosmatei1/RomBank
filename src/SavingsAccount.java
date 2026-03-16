@@ -1,13 +1,20 @@
+import lombok.*;
+
+@Getter @Setter
 public class SavingsAccount extends BankAccount {
     private double interestRate;
 
-    SavingsAccount(String user, String accountNumber, double balance, double interestRate){
-        super(accountNumber, balance, user);
+    SavingsAccount(String user, String accountNumber, String pin, double balance, double interestRate){
+        super(user, accountNumber, pin, balance);
         this.interestRate = interestRate;
     }
 
     @Override
     public void withdraw(double amount){
+        if(amount <= 0){
+            System.out.println("Amount must be greater than 0.");
+            return;
+        }
         if (amount <= getBalance()){
             double newBalance = getBalance() - amount;
             setBalance(newBalance);
