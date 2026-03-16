@@ -1,13 +1,35 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+import java.util.ArrayList;
+import java.util.List;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+public class Main {
+    public static void main(String[] args) {
+        // Cream serviciul bancar
+        List<BankAccount> accounts = new ArrayList<>();
+
+        // Cream un cont de economii si unul curent
+        SavingsAccount savings = new SavingsAccount("SV123", "Andrei", 1000.0, 5.0);
+        CheckingAccount checking = new CheckingAccount("CH456", "Maria", 200.0, 500.0);
+
+        accounts.add(savings);
+        accounts.add(checking);
+
+        System.out.println("--- Testare operatiuni ---");
+
+        // 1. Testare retragere normala din economii
+        savings.withdraw(500);
+
+        // 2. Testare aplicare dobanda (specific Savings)
+        savings.setInterestRate(1);
+
+        // 3. Testare overdraft pe contul curent
+        checking.withdraw(600); // Balanta va deveni -400, e permis (limita e 500)
+
+        System.out.println("\n--- Rezumat final conturi ---");
+        for (BankAccount account : accounts) {
+            // Aici vedem polimorfismul: Java apeleaza getBalance() din BankAccount
+            // dar stim ca obiectele sunt de tipuri diferite
+            System.out.println("Titular: " + account.getUser() +
+                    " | Sold: " + account.getBalance());
+        }
     }
 }
