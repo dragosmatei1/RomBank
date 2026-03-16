@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class BankApp {
-    BankService bankService = new BankService();
-    Scanner scanner = new Scanner(System.in);
+    private BankService bankService = new BankService();
+    private Scanner scanner = new Scanner(System.in);
     private BankAccount currentAccount = null;
 
     public void start(){

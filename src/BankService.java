@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.io.*;
 
 public class BankService {
-    Map<String, BankAccount> bankAccounts = new HashMap<>();
+    private Map<String, BankAccount> bankAccounts = new HashMap<>();
     private final String FILE = "accounts.txt";
 
     public void addAccount(BankAccount bankAccount){

@@ -19,7 +19,7 @@ public class SavingsAccount extends BankAccount {
             double newBalance = getBalance() - amount;
             setBalance(newBalance);
             System.out.println("Savings account withdrawal successful!");
-            System.out.println("Current balance is: " + newBalance);
+            System.out.println("Current balance is: $" + newBalance);
         }
         else {
             System.out.println("You don't have sufficient funds!");
