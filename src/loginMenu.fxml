@@ -85,7 +85,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="LoginController" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
         <Label fx:id="errorPrompt" alignment="CENTER" layoutX="161.0" layoutY="316.0" prefHeight="27.0" prefWidth="0.0" style="&#10;" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
@@ -98,7 +98,7 @@
                </font>
             </Button>
             <PasswordField fx:id="pinField" layoutX="235.0" layoutY="252.0" promptText="PIN" />
-            <TextField fx:id="accountNumber" layoutX="235.0" layoutY="218.0" promptText="Account Number" />
+            <TextField fx:id="accountNumberField" layoutX="235.0" layoutY="218.0" promptText="Account Number" />
       </children>
     </AnchorPane>
   </children>

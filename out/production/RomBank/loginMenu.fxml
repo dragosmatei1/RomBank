@@ -44,7 +44,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BankController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -85,35 +85,20 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="LoginController" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label fx:id="balanceLabel" alignment="CENTER" layoutX="232.0" layoutY="333.0" style="&#10;" text="Balance:" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+        <Label fx:id="errorPrompt" alignment="CENTER" layoutX="161.0" layoutY="316.0" prefHeight="27.0" prefWidth="0.0" style="&#10;" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
             <Font size="18.0" />
           </font>
         </Label>
-            <AnchorPane layoutX="207.0" layoutY="39.0" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Button layoutX="72.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleExit" text="Exit">
-                     <font>
-                        <Font size="17.0" />
-                     </font></Button>
-                  <Button layoutX="49.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleWithdraw" text="Withdraw">
-                     <font>
-                        <Font size="17.0" />
-                     </font></Button>
-                  <Button layoutX="56.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleDeposit" text="Deposit">
-                     <font>
-                        <Font size="17.0" />
-                     </font></Button>
-                  <Button layoutX="34.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleShowBalance" text="Show Balance">
-                     <font>
-                        <Font size="17.0" />
-                     </font></Button>
-               </children></AnchorPane>
-            <TextField fx:id="accountNumberField" layoutX="232.0" layoutY="239.0" promptText="AB1234" />
-            <TextField fx:id="amountField" layoutX="232.0" layoutY="308.0" promptText="Amount to deposit" />
-            <PasswordField fx:id="pinField" layoutX="232.0" layoutY="272.0" promptText="PIN" />
+            <Button layoutX="277.0" layoutY="292.0" mnemonicParsing="false" onAction="#loginButton" text="Login">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <PasswordField fx:id="pinField" layoutX="235.0" layoutY="252.0" promptText="PIN" />
+            <TextField fx:id="accountNumberField" layoutX="235.0" layoutY="218.0" promptText="Account Number" />
       </children>
     </AnchorPane>
   </children>

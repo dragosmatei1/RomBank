@@ -3,28 +3,30 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.File;
+import java.io.IOException;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            File file = new File("src/grafica.fxml");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/loginMenu.fxml"));
+            LoginController loginController = new LoginController();
 
-            if (!file.exists()) {
-                System.out.println("EROARE: Fisierul NU a fost gasit la calea specificata!");
-                return;
-            }
+            loader.setController(loginController);
 
-            FXMLLoader loader = new FXMLLoader(file.toURI().toURL());
             Parent root = loader.load();
 
-            primaryStage.setTitle("RomBank");
-            primaryStage.setScene(new Scene(root, 600, 400));
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("RomBank - Login");
+            primaryStage.setScene(scene);
+
+            primaryStage.setResizable(false);
             primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        } catch (IOException ioException) {
+            System.out.println("Error: Couldn't load loginMenu.fxml.");
+            ioException.printStackTrace();
         }
     }
 
